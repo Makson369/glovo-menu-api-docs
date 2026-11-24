@@ -21,7 +21,9 @@ http.createServer((req, res) => {
   catch { res.writeHead(400); return res.end('Bad request'); }
 
   if (urlPath === '/health') { res.writeHead(200); return res.end('ok'); }
-  if (urlPath === '/en') { res.writeHead(301, { Location: '/en/' }); return res.end(); }
+  if (urlPath === '/ua') { res.writeHead(301, { Location: '/ua/' }); return res.end(); }
+  // EN used to live at /en/ — keep old links working.
+  if (urlPath === '/en' || urlPath === '/en/' || urlPath === '/en/index.html') { res.writeHead(301, { Location: '/' }); return res.end(); }
 
   let file = path.normalize(path.join(ROOT, urlPath));
   if (!file.startsWith(ROOT)) { res.writeHead(403); return res.end('Forbidden'); }

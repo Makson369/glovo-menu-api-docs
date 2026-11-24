@@ -1,6 +1,6 @@
 # Glovo Menu Tool API — docs
 
-Документація (UA `/`, EN `/en/`) і Postman-колекція (`/Glovo_Menu_Tool_API.postman_collection.json`).
+Документація (EN `/` — основна, UA `/ua/`; старе `/en/` редіректить на `/`) і Postman-колекція (`/Glovo_Menu_Tool_API.postman_collection.json`).
 
 ## Локально
 ```bash
