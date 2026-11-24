@@ -1,0 +1,1075 @@
+{
+  "info": {
+    "name": "Glovo Menu Tool API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Glovo menu-tool partners API. Docs: https://claude.ai/artifact/PThgj2iAZuQntDT1BeWJM9"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://menu-tool.glovoapp.com"
+    },
+    {
+      "key": "storeAddressId",
+      "value": "choiceqr_123456"
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Products",
+      "description": "Store products, organised into product groups (the lower level of Glovo menu categorisation). Each product belongs to a group.",
+      "item": [
+        {
+          "name": "Get all products",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/partners/api/products/{{storeAddressId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "partners",
+                "api",
+                "products",
+                "{{storeAddressId}}"
+              ]
+            },
+            "description": "Allows you to get products by groups. Represents a physical product in a store, although we give stores flexibility to configure what they want to offer as products. Each product belongs in a section."
+          }
+        },
+        {
+          "name": "Edit products",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Send-To-Glovo",
+                "value": "false",
+                "disabled": true,
+                "description": "If the parameter is set to \"false\", then uploading to Glovo will not occur"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/partners/api/products/{{storeAddressId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "partners",
+                "api",
+                "products",
+                "{{storeAddressId}}"
+              ]
+            },
+            "description": "Allow you to edit product parameters",
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"id\": \"3d7a8ec6-47ea-11ed-b878-0242ac120002\",\n    \"title\": \"Pizzas\",\n    \"active\": true,\n    \"position\": 0,\n    \"items\": [\n      {\n        \"id\": \"4d7a8ec6-47ea-11ed-b878-0242ac120002\",\n        \"title\": \"Margherita\",\n        \"active\": true,\n        \"description\": \"pizza with tomato paste, mozzarella, tomatos and basilicum\",\n        \"price\": 220,\n        \"restrictions\": {\n          \"is_tobacco\": true,\n          \"is_alcoholic\": true\n        },\n        \"extra_image_urls\": [\n          \"https://glovoapp.com/images/logo_green_extra.svg\",\n          \"https://glovoapp.com/images/logo_green_extra_2.svg\"\n        ],\n        \"image\": \"https://glovoapp.com/images/logo_green.svg\",\n        \"position\": 0,\n        \"external_id\": \"4d7a8ec6-47ea-11ed-b878-0242ac120002\",\n        \"options\": [\n          \"string\"\n        ]\n      }\n    ]\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Get product update transaction",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/partners/api/products/{{storeAddressId}}/transactions/:transactionId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "partners",
+                "api",
+                "products",
+                "{{storeAddressId}}",
+                "transactions",
+                ":transactionId"
+              ],
+              "variable": [
+                {
+                  "key": "transactionId",
+                  "value": "choiceqr_123456-6b0419b55ca56",
+                  "description": "ID of the transaction"
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "name": "200 SUCCESS",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/partners/api/products/{{storeAddressId}}/transactions/:transactionId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "partners",
+                    "api",
+                    "products",
+                    "{{storeAddressId}}",
+                    "transactions",
+                    ":transactionId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "transactionId",
+                      "value": "choiceqr_123456-6b0419b55ca56",
+                      "description": "ID of the transaction"
+                    }
+                  ]
+                },
+                "description": ""
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"queue_transaction_id\": \"choiceqr_123456-6b0419b55ca56\",\n  \"status\": \"processed\",\n  \"store_address_id\": \"choiceqr_123456\",\n  \"glovo_status\": {\n    \"transaction_id\": \"40584ee5-9654-484e-b2bf-a3f5ed3b75ad\",\n    \"status\": \"SUCCESS\",\n    \"last_updated_at\": \"2026-11-23T10:47:23.811379573Z\",\n    \"details\": [],\n    \"promotion_statuses\": []\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Bulk update products",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/partners/api/products/{{storeAddressId}}/bulk",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "partners",
+                "api",
+                "products",
+                "{{storeAddressId}}",
+                "bulk"
+              ]
+            },
+            "description": "This method edits title, price, image and availability for some products",
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"id\": \"3d7a8ec6-47ea-11ed-b878-0242ac120002\",\n    \"title\": \"Pizzas\",\n    \"active\": true,\n    \"position\": 0,\n    \"items\": [\n      {\n        \"id\": \"4d7a8ec6-47ea-11ed-b878-0242ac120002\",\n        \"title\": \"Margherita\",\n        \"active\": true,\n        \"description\": \"pizza with tomato paste, mozzarella, tomatos and basilicum\",\n        \"price\": 220,\n        \"restrictions\": {\n          \"is_tobacco\": true,\n          \"is_alcoholic\": true\n        },\n        \"extra_image_urls\": [\n          \"https://glovoapp.com/images/logo_green_extra.svg\",\n          \"https://glovoapp.com/images/logo_green_extra_2.svg\"\n        ],\n        \"image\": \"https://glovoapp.com/images/logo_green.svg\",\n        \"position\": 0,\n        \"external_id\": \"4d7a8ec6-47ea-11ed-b878-0242ac120002\",\n        \"options\": [\n          \"string\"\n        ]\n      }\n    ]\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Check product bulk update status",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/partners/api/products/{{storeAddressId}}/bulk/:transactionId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "partners",
+                "api",
+                "products",
+                "{{storeAddressId}}",
+                "bulk",
+                ":transactionId"
+              ],
+              "variable": [
+                {
+                  "key": "transactionId",
+                  "value": "choiceqr_123456-6b0419b55ca56",
+                  "description": "Unique identifier of the bulk operation"
+                }
+              ]
+            },
+            "description": "Method checking the status of updated products in glovo by bulk method"
+          }
+        },
+        {
+          "name": "Edit one product",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/partners/api/products/{{storeAddressId}}/modify",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "partners",
+                "api",
+                "products",
+                "{{storeAddressId}}",
+                "modify"
+              ]
+            },
+            "description": "This method only edits price and availability for one product",
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"id\": \"3d7a8ec6-47ea-11ed-b878-0242ac120002\",\n    \"title\": \"Pizzas\",\n    \"active\": true,\n    \"position\": 0,\n    \"items\": [\n      {\n        \"id\": \"4d7a8ec6-47ea-11ed-b878-0242ac120002\",\n        \"title\": \"Margherita\",\n        \"active\": true,\n        \"description\": \"pizza with tomato paste, mozzarella, tomatos and basilicum\",\n        \"price\": 220,\n        \"restrictions\": {\n          \"is_tobacco\": true,\n          \"is_alcoholic\": true\n        },\n        \"extra_image_urls\": [\n          \"https://glovoapp.com/images/logo_green_extra.svg\",\n          \"https://glovoapp.com/images/logo_green_extra_2.svg\"\n        ],\n        \"image\": \"https://glovoapp.com/images/logo_green.svg\",\n        \"position\": 0,\n        \"external_id\": \"4d7a8ec6-47ea-11ed-b878-0242ac120002\",\n        \"options\": [\n          \"string\"\n        ]\n      }\n    ]\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Delete product group",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/partners/api/products/{{storeAddressId}}/:groupId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "partners",
+                "api",
+                "products",
+                "{{storeAddressId}}",
+                ":groupId"
+              ],
+              "variable": [
+                {
+                  "key": "groupId",
+                  "value": "",
+                  "description": "Unique identifier of the product group"
+                }
+              ]
+            },
+            "description": "Allow you to delete group of products"
+          }
+        },
+        {
+          "name": "Delete product",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/partners/api/products/{{storeAddressId}}/:groupId/:productId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "partners",
+                "api",
+                "products",
+                "{{storeAddressId}}",
+                ":groupId",
+                ":productId"
+              ],
+              "variable": [
+                {
+                  "key": "groupId",
+                  "value": "",
+                  "description": "Unique identifier of the product group"
+                },
+                {
+                  "key": "productId",
+                  "value": "",
+                  "description": "Unique identifier of the product"
+                }
+              ]
+            },
+            "description": "Allow you to delete product by id"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Options",
+      "description": "Additional options (modifiers) that can be added to a product, such as sauces or drinks. Optional.",
+      "item": [
+        {
+          "name": "Get all options by group",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/partners/api/options/{{storeAddressId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "partners",
+                "api",
+                "options",
+                "{{storeAddressId}}"
+              ]
+            },
+            "description": "Get all options by groups. Each option group can have a minimum and maximum of choices for the customer. It is not mandatory for a product to have option. Each option could have a different price impact. Examples of attribute groups could include: Sauces, Drinks, etc"
+          }
+        },
+        {
+          "name": "Update options",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/partners/api/options/{{storeAddressId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "partners",
+                "api",
+                "options",
+                "{{storeAddressId}}"
+              ]
+            },
+            "description": "Allows you to perform a partial update over an option. Only the options sent in the request will be updated.",
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"id\": \"5d7a8ec6-47ea-11ed-b878-0242ac120002\",\n    \"title\": \"Choose a side\",\n    \"active\": true,\n    \"min\": 0,\n    \"max\": 1,\n    \"moreThanOnce\": true,\n    \"items\": [\n      {\n        \"id\": \"6d7a8ec6-47ea-11ed-b878-0242ac120002\",\n        \"title\": \"cheese side\",\n        \"active\": true,\n        \"price\": 30\n      }\n    ]\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Delete option group",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/partners/api/options/{{storeAddressId}}/:groupId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "partners",
+                "api",
+                "options",
+                "{{storeAddressId}}",
+                ":groupId"
+              ],
+              "variable": [
+                {
+                  "key": "groupId",
+                  "value": "",
+                  "description": "Unique identifier of the option group"
+                }
+              ]
+            },
+            "description": "Allows you to delete group of options."
+          }
+        },
+        {
+          "name": "Delete option",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/partners/api/options/{{storeAddressId}}/:groupId/:optionId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "partners",
+                "api",
+                "options",
+                "{{storeAddressId}}",
+                ":groupId",
+                ":optionId"
+              ],
+              "variable": [
+                {
+                  "key": "groupId",
+                  "value": "",
+                  "description": "Unique identifier of the option group"
+                },
+                {
+                  "key": "optionId",
+                  "value": "",
+                  "description": "Unique identifier of the option"
+                }
+              ]
+            },
+            "description": "Allows you to delete option by id."
+          }
+        },
+        {
+          "name": "Bulk update options",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/partners/api/options/{{storeAddressId}}/bulk",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "partners",
+                "api",
+                "options",
+                "{{storeAddressId}}",
+                "bulk"
+              ]
+            },
+            "description": "This method edits title, price, image and availability for some products",
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"id\": \"side1\",\n    \"title\": \"French fries\",\n    \"price\": \"1.5\",\n    \"active\": true\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Check option bulk update status",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/partners/api/options/{{storeAddressId}}/bulk/:transactionId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "partners",
+                "api",
+                "options",
+                "{{storeAddressId}}",
+                "bulk",
+                ":transactionId"
+              ],
+              "variable": [
+                {
+                  "key": "transactionId",
+                  "value": "choiceqr_123456-6b0419b55ca56",
+                  "description": "Unique identifier of the bulk operation"
+                }
+              ]
+            },
+            "description": "Method checking the status of updated option in glovo by bulk method"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Collections",
+      "description": "Main categorisation of a Glovo menu. A menu must have at least one collection.",
+      "item": [
+        {
+          "name": "Get collections",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/partners/api/menu-collections/{{storeAddressId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "partners",
+                "api",
+                "menu-collections",
+                "{{storeAddressId}}"
+              ]
+            },
+            "description": "Allow you to get Collections"
+          }
+        },
+        {
+          "name": "Edit collections",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/partners/api/menu-collections/{{storeAddressId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "partners",
+                "api",
+                "menu-collections",
+                "{{storeAddressId}}"
+              ]
+            },
+            "description": "Allow you to edit Collections",
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"id\": \"2d7a8ec6-47ea-11ed-b878-0242ac120002\",\n    \"title\": \"Italian food\",\n    \"active\": true,\n    \"position\": 0,\n    \"image\": \"https://glovoapp.com/images/logo_green.svg\",\n    \"productGroups\": [\n      \"string\"\n    ]\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Delete collection",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/partners/api/menu-collections/{{storeAddressId}}/:collectionId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "partners",
+                "api",
+                "menu-collections",
+                "{{storeAddressId}}",
+                ":collectionId"
+              ],
+              "variable": [
+                {
+                  "key": "collectionId",
+                  "value": "",
+                  "description": "Unique identifier of the store"
+                }
+              ]
+            },
+            "description": "Allow you to delete one Collection by id\n* CollectionId parameter is optional\n* Deleting a collection and all related entities by collectionId\n* Deleting only collections by storeAddressId"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Super collections",
+      "description": "Uppermost level of menu categorisation. Optional: if at least one exists, customers see them first when opening the store.",
+      "item": [
+        {
+          "name": "Get all super collections",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/partners/api/menu-supercollections/{{storeAddressId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "partners",
+                "api",
+                "menu-supercollections",
+                "{{storeAddressId}}"
+              ]
+            },
+            "description": "Allow you to get Super Collections."
+          }
+        },
+        {
+          "name": "Edit super collections",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/partners/api/menu-supercollections/{{storeAddressId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "partners",
+                "api",
+                "menu-supercollections",
+                "{{storeAddressId}}"
+              ]
+            },
+            "description": "Allow you to edit Super Collections",
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"id\": \"1d7a8ec6-47ea-11ed-b878-0242ac120002\",\n    \"title\": \"European food\",\n    \"active\": true,\n    \"position\": 0,\n    \"image\": \"https://glovoapp.com/images/logo_green.svg\",\n    \"menuCollections\": [\n      \"string\"\n    ]\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Delete super collection",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/partners/api/menu-supercollections/{{storeAddressId}}/:superCollectionId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "partners",
+                "api",
+                "menu-supercollections",
+                "{{storeAddressId}}",
+                ":superCollectionId"
+              ],
+              "variable": [
+                {
+                  "key": "superCollectionId",
+                  "value": "",
+                  "description": "Unique identifier of the store"
+                }
+              ]
+            },
+            "description": "* superCollectionId parameter is optional\n* Deleting a superCollection and all related entities by superCollectionId\n* Deleting only superCollection by storeAddressId"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "description": "Update order status and modify products in an order.",
+      "item": [
+        {
+          "name": "Update order status",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/partners/api/orders/status/{{storeAddressId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "partners",
+                "api",
+                "orders",
+                "status",
+                "{{storeAddressId}}"
+              ]
+            },
+            "description": "Allows the update of the order status during different stages of the preparation.\n\n\"ACCEPTED\": The order has been accepted by the store. Be aware that if you don't accept the order we will still move forward with the order, as we don't require an acceptance to proceed.\n\n\"READY_FOR_PICKUP\": The order is ready to be picked up by a courier or the customer (Only available for orders delivered by Glovo couriers)\n\n\"PICKED_UP_BY_CUSTOMER\": The order has been picked up by the customer (Only available for stores with Pickup by customer configuration enabled)\n\n\"OUT_FOR_DELIVERY\": The courier has collected the order in the store and is now being delivered to the customer (Only available for Marketplace orders)",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"ACCEPTED\",\n  \"orderId\": \"MQ123123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Modify products in order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/partners/api/orders/modify/{{storeAddressId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "partners",
+                "api",
+                "orders",
+                "modify",
+                "{{storeAddressId}}"
+              ]
+            },
+            "description": "An update request can only be sent once, all subsequent requests will be rejected",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderId\": \"1231231\",\n  \"replacements\": [\n    {\n      \"purchased_product_id\": \"string\",\n      \"product\": [\n        {\n          \"id\": \"string\",\n          \"quantity\": 0,\n          \"attributes\": [\n            {\n              \"id\": null,\n              \"quantity\": null\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  \"removed\": [\n    \"string\"\n  ],\n  \"added\": [\n    {\n      \"id\": \"string\",\n      \"quantity\": 0,\n      \"attributes\": [\n        {\n          \"id\": \"string\",\n          \"quantity\": 0\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Schedule",
+      "description": "Store opening hours and temporary closing.",
+      "item": [
+        {
+          "name": "Get store schedule",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/partners/api/schedule/{{storeAddressId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "partners",
+                "api",
+                "schedule",
+                "{{storeAddressId}}"
+              ]
+            },
+            "description": "Get schedule by Store id"
+          }
+        },
+        {
+          "name": "Get temporary closing",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/partners/api/schedule/{{storeAddressId}}/closing",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "partners",
+                "api",
+                "schedule",
+                "{{storeAddressId}}",
+                "closing"
+              ]
+            },
+            "description": "Get information about active temporary closing"
+          }
+        },
+        {
+          "name": "Activate temporary closing",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/partners/api/schedule/{{storeAddressId}}/closing",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "partners",
+                "api",
+                "schedule",
+                "{{storeAddressId}}",
+                "closing"
+              ]
+            },
+            "description": "Active temporary closing",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"until\": \"2019-12-20T10:00:00+01:00\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Remove temporary closing",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/partners/api/schedule/{{storeAddressId}}/closing",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "partners",
+                "api",
+                "schedule",
+                "{{storeAddressId}}",
+                "closing"
+              ]
+            },
+            "description": "De-activate temporary closing"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Store address",
+      "description": "Operations on the data of a specific store address.",
+      "item": [
+        {
+          "name": "Clear all store data",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/partners/api/store-addresses/{{storeAddressId}}/clear-all-data",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "partners",
+                "api",
+                "store-addresses",
+                "{{storeAddressId}}",
+                "clear-all-data"
+              ]
+            },
+            "description": "Clearing all data for store address\nclearing supercollections,\nclearing collections,\ncleaning product groups,\ncleaning of goods,\nclearing option groups,\nclearing options,"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Partner API",
+      "description": "Bulk update of products by external ID.",
+      "item": [
+        {
+          "name": "Bulk update by external ID",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/partners/api/partners_api/store/{{storeAddressId}}/products/bulk-update",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "partners",
+                "api",
+                "partners_api",
+                "store",
+                "{{storeAddressId}}",
+                "products",
+                "bulk-update"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"id\": \"123-3214\",\n    \"price\": 123.45,\n    \"multiprice\": true,\n    \"stores_addresses\": [\n      {\n        \"storeAddressId\": \"string\",\n        \"price\": 0,\n        \"available\": true,\n        \"stock\": 0,\n        \"threshold\": 0\n      }\n    ]\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
